@@ -8,12 +8,17 @@ export default function RegisterPage() {
     const [password,setPassword] = useState('');
     async function registerUser(ev) {
         ev.preventDefault();
-        await axios.post('/register', {
-            name, 
-            email, 
-            password,
-        });
-        alert('Registration successful. Now you can log in');
+        try {
+            await axios.post('/register', {
+                name, 
+                email, 
+                password,
+            });
+            alert('Registration successful. Now you can log in');
+        } catch (e) {
+            alert('Registration failed. Please try again later');
+        }
+        
     }
 
     return (
