@@ -6,7 +6,7 @@ const User = require('./models/User.js')
 require('dotenv').config()
 const app = express();
 
-const bcryptSalt = await bcrypt.genSalt(10);
+const bcryptSalt = bcrypt.genSaltSync(10);
 
 app.use(express.json());
 app.use(cors({
@@ -34,6 +34,26 @@ app.post('/register', async (req,res) => {
         res.json(userDoc);
     } catch (e) {
         res.status(422).json(e);
+    }
+    
+})
+
+app.post('/login', async (req,res) => {
+    const {email,password} = req.body;
+
+    try {
+        const userDoc = await User.findOne({ email });
+        if (!userDoc){
+            res.status(401).json('User not found');
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, userDoc.password);
+        if (!isPasswordValid) {
+            res.status(401).json('Invalid password')
+        }
+        res.json(userDoc)
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' })
     }
     
 })
