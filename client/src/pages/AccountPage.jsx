@@ -1,18 +1,42 @@
-import React from 'react'
-import { useContext } from 'react'
-import { UserContext } from '../UserContext'
-import { Navigate } from 'react-router-dom'
+import React, { useContext } from 'react';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 const AccountPage = () => {
-  const {user} = useContext(UserContext)
+  const { ready, user } = useContext(UserContext);
+  const { subpage } = useParams();
 
-  if (!user) {
-    return <Navigate to={'/login'} />
+  if (!ready) {
+    return 'Loading...';
+  }
+
+  if (ready && !user) {
+    return <Navigate to={'/login'} />;
+  }
+
+  function linkClasses(type) {
+    let classes = 'py-2 px-6';
+    if (type === subpage) {
+      classes += ' bg-primary text-white rounded-full';
+    }
+    return classes;
   }
 
   return (
-    <div>Account Page for {user.name}</div>
-  )
-}
+    <div>
+      <nav className="w-full flex justify-center mt-8 gap-2">
+        <Link className={linkClasses('profile')} to={'/account'}>
+          My Profile
+        </Link>
+        <Link className={linkClasses('bookings')} to={'/account/bookings'}>
+          My Bookings
+        </Link>
+        <Link className={linkClasses('places')} to={'/account/places'}>
+          My Accommodations
+        </Link>
+      </nav>
+    </div>
+  );
+};
 
-export default AccountPage
+export default AccountPage;
