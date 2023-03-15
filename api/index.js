@@ -68,4 +68,8 @@ app.post('/login', async (req, res) => {
 
 });
 
+app.get('/profile', (req,res) => {
+    res.json('user info')
+})
+
 app.listen(4000);
