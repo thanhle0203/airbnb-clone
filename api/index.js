@@ -16,6 +16,12 @@ app.use(cors({
     origin: 'http://127.0.0.1:5173',
 }));
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
+    next();
+  });
+  
+
 console.log(process.env.MONGO_URL);
 mongoose.connect(process.env.MONGO_URL);
 

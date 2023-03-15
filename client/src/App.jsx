@@ -5,7 +5,7 @@ import LoginPage from './pages/LoginPage'
 import { Layout } from './Layout'
 import RegisterPage from './pages/RegisterPage'
 import axios from 'axios'
-import { UserContextProvider } from './UserContect'
+import { UserContextProvider } from './UserContext.jsx'
 
 axios.defaults.baseURL = 'http://localhost:4000';
 axios.defaults.withCredentials = true;
