@@ -4,7 +4,6 @@ import { UserContext } from '../UserContext';
 
 const AccountPage = () => {
   const { ready, user } = useContext(UserContext);
-  const { subpage } = useParams();
 
   if (!ready) {
     return 'Loading...';
@@ -14,7 +13,12 @@ const AccountPage = () => {
     return <Navigate to={'/login'} />;
   }
 
-  function linkClasses(type) {
+  let { subpage } = useParams();
+  if (subpage === undefined) {
+    subpage = 'profile';
+  }
+
+  function linkClasses(type = null) {
     let classes = 'py-2 px-6';
     if (type === subpage) {
       classes += ' bg-primary text-white rounded-full';
@@ -24,7 +28,7 @@ const AccountPage = () => {
 
   return (
     <div>
-      <nav className="w-full flex justify-center mt-8 gap-2">
+      <nav className='w-full flex justify-center mt-8 gap-2'>
         <Link className={linkClasses('profile')} to={'/account'}>
           My Profile
         </Link>
