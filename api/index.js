@@ -89,4 +89,10 @@ app.get('/profile', async (req, res) => {
     }
 });
 
-app.listen(4000);
+app.post('/logout', async (req,res) => {
+    res.cookie('token', '').json(true);
+});
+
+app.listen(4000, () => {
+    console.log('Server listening on port 4000');
+});
