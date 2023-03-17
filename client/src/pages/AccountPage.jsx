@@ -5,18 +5,19 @@ import { UserContext } from '../UserContext';
 
 const AccountPage = () => {
   const [redirect,setRedirect] = useState(null);
-  const { ready, user } = useContext(UserContext);
+  const { ready,user,setUser } = useContext(UserContext);
+
+  async function logout() {
+    await axios.post('/logout');
+    setRedirect('/');
+    setUser(null);
+  }
 
   if (!ready) {
     return 'Loading...';
   }
 
-  async function logout() {
-    await axios.post('/logout');
-    setRedirect('/');
-  }
-
-  if (ready && !user) {
+  if (ready && !user && !redirect) {
     return <Navigate to={'/login'} />;
   }
 
