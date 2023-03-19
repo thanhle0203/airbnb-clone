@@ -98,7 +98,29 @@ export const PlacesPage = () => {
                         </label>
                        
                     </div>
+                    <h2 className='text-2xl mt-4'>Extra Info</h2>
+                    <p className='text-gray-500 text-sm'>house rules, etc</p>
+                    <textarea />
+                    <h2 className='text-2xl mt-4'>Check in&out times</h2>
+                    <p className='text-gray-500 text-sm'> add check in and out times, remember to have some time window for cleaning the rom between guests</p>
+                    <div className='grid gap-2 sm:gird-cols-3'>
+                        <div>
+                            <h3 className='mt-2 -mb-1'>Check in time</h3>
+                            <input type="text" placeholder='14:00' />
+                        </div>
+                        <div>
+                            <h3 className='mt-2 -mb-1'>Check out time</h3>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <h3 className='mt-2 -mb-1'>Max number of guests</h3>
+                            <input type="text" />
+                        </div>
+                    </div>
+
+                    <button className='primary my-4'>Save</button>
                 </form>
+                
             </div>
         )}
     </div>
