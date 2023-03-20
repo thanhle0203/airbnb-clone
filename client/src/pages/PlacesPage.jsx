@@ -1,10 +1,40 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 export const PlacesPage = () => {
   const {action} = useParams();
-  console.log(action);
+  const [title,setTitle] = useState('');
+  const [address,setAddress] = useState('')
+  const [addedPhotos,setAddedPhotos] = useState([]);
+  const [photoLink,setPhotoLink] = useState('');
+  const [description,setDescription] = useState('');
+  const [perks,setPerks] = useState([]);
+  const [extraInfo,setExtraInfo] = useState('');
+  const [checkIn,setCheckIn] = useState('');
+  const [checkOut,setCheckOut] = useState('');
+  const [maxGuests,setMaxGuests] = useState(1);
 
+  function inputHeader(text) {
+    return (
+        <h2 className='text-2xl mt-4'>{text}</h2>
+    )
+  }
+
+  function inputDescription(text) {
+    return (
+        <p className='text-gray-500 text-sm'>{text}</p>
+    )
+  }
+
+  function preInput(header,description) {
+    return (
+        <>
+            {inputHeader(header)}
+            {inputDescription(description)}
+        </>
+    )
+  }
+ 
   return (
     <div>
         {action !== 'new' && (
@@ -23,14 +53,11 @@ export const PlacesPage = () => {
         {action === 'new' && (
             <div>
                 <form>
-                    <h2 className='text-2xl mt-4'>Title</h2>
-                    <p className='text-gray-500 text-sm'>title for your place. should be short and catchy as in advertisement</p>
+                    {preInput('Title', 'title for your place. should be short and catchy as in advertisement')}
                     <input type="text" placeholder="title, for example: My lovely apartment" />
-                    <h2 className='text-2xl mt-4'>Address</h2>
-                    <p className='text-gray-500 text-sm'>Address to your place</p>
+                    {preInput('Address', 'Address to your place')}
                     <input type="text" placeholder="address" />
-                    <h2 className='text-2xl mt-4'>Photos</h2>
-                    <p className='text-gray-500 text-sm'>more = better</p>
+                    {preInput('Photos','more = better')}
                     <div className='flex gap-2'>
                         <input type="text" placeholder={'Add using a link ...jpg'} />
                         <button className='bg-gray-200 px-4 rounded-2xl'>Add&nbsp;photo</button>
@@ -43,11 +70,10 @@ export const PlacesPage = () => {
                             Upload 
                         </button>
                     </div>
-                    <h2 className='text-2xl mt-4'>Description</h2>
-                    <p className='text-gray-500 text-sm'>description of the place</p>
+                    {preInput('Description', 'description of the place')}
                     <textarea />
-                    <h2 className='text-2xl mt-4'>Perks</h2>
-                    <p className='text-gray-500 text-sm'>select all the perks of your place</p>
+                    {preInput('Perks', 'select all the perks of your place')}
+
                     <div className='grid mt-2 gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6'>
                         <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer'>
                             <input type="checkbox" />
