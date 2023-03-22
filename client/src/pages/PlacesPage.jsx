@@ -40,9 +40,7 @@ export const PlacesPage = () => {
   async function addPhotoByLink(ev) {
     ev.preventDefault();
     const {data:filename} = await axios.post('/upload-by-link', {link: photoLink})
-    setAddedPhotos(prev => {
-        return [...prev, filename];
-    })
+    setAddedPhotos(prev => [...prev, filename]);
     setPhotoLink('');
   }
  
@@ -90,7 +88,7 @@ export const PlacesPage = () => {
                         </button>
                     </div>
                     {preInput('Description', 'description of the place')}
-                    <textarea value={description} onChange={ev => setDescription(ev => ev.target.value)} />
+                    <textarea value={description} onChange={ev => setDescription(ev.target.value)} />
                     {preInput('Perks', 'select all the perks of your place')}
 
                     <div className='grid mt-2 gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6'>

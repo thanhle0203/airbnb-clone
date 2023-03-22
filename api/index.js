@@ -101,12 +101,12 @@ app.post('/upload-by-link', async (req,res) => {
     const newName = 'photo' + Date.now() + '.jpg';
     await imageDownloader.image({
         url: link,
-        dest: __dirname + '/uploads' + newName,
+        dest: __dirname + '/upload/' + newName,
     });
 
     res.json(newName);
 })
 
 app.listen(4000, () => {
-    console.log('Server listening on port 4000');
-});
+    console.log("Server is running on port 4000")
+})
