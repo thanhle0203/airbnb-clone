@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {useState} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Perks } from '../Perks';
@@ -34,6 +35,10 @@ export const PlacesPage = () => {
             {inputDescription(description)}
         </>
     )
+  }
+
+  async function addPhotoByLink() {
+    await axios.post('/upload-by-link', {link: photoLink})
   }
  
   return (

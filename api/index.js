@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User.js');
 const CookieParser = require('cookie-parser');
+const imageDownloader = require('image-downloader');
 require('dotenv').config();
 
 const app = express();
@@ -92,6 +93,18 @@ app.get('/profile', async (req, res) => {
 app.post('/logout', async (req,res) => {
     res.cookie('token', '').json(true);
 });
+
+console.log({__dirname});
+app.post('/upload-by-link', async (req,res) => {
+    const {link} = req.body;
+    const newName = Date.now() + '.jpg';
+    await imageDownloader.image({
+        url: link,
+        dest: __dirname + '/uploads' + newName,
+    });
+
+    res.json(__dirname + '/uploads' + newName);
+})
 
 app.listen(4000, () => {
     console.log('Server listening on port 4000');
