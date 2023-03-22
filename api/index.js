@@ -15,7 +15,8 @@ const { v4: uuidv4 } = require('uuid');
 const jwtSecret = uuidv4();
 
 app.use(express.json());
-app.use(CookieParser())
+app.use(CookieParser());
+app.use('/upload', express.static(__dirname + '/upload'));
 app.use(cors({
     credentials: true,
     origin: 'http://127.0.0.1:5173',
@@ -97,13 +98,13 @@ app.post('/logout', async (req,res) => {
 console.log({__dirname});
 app.post('/upload-by-link', async (req,res) => {
     const {link} = req.body;
-    const newName = Date.now() + '.jpg';
+    const newName = 'photo' + Date.now() + '.jpg';
     await imageDownloader.image({
         url: link,
         dest: __dirname + '/uploads' + newName,
     });
 
-    res.json(__dirname + '/uploads' + newName);
+    res.json(newName);
 })
 
 app.listen(4000, () => {
