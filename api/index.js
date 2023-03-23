@@ -61,7 +61,7 @@ app.post('/login', async (req, res) => {
             return res.status(401).json('User not found');
         }
 
-        const isPasswordValid = await bcrypt.compare(password, userDoc.password);
+        const isPasswordValid = bcrypt.compare(password, userDoc.password);
         if (!isPasswordValid) {
             return res.status(401).json('Invalid password');
         }

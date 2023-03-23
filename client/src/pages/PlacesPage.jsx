@@ -77,7 +77,7 @@ export const PlacesPage = () => {
                     <div className='mt-2 grid gap-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
                         {addedPhotos.length > 0 && addedPhotos.map(link => (
                             <div>
-                                <img className='rounded-2xl' src={'http://localhost:4000/uploads/' + link} />
+                                <img className='rounded-2xl' src={'http://localhost:4000/upload/' + link} />
                             </div>
                         ))}
                         <button className='flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-2 text-2xl text-gray-600'>
